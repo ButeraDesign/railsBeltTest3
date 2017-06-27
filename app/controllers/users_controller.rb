@@ -11,13 +11,8 @@ class UsersController < ApplicationController
 
   def show
     puts 'In Show'
-    @user = User.find(session[:user_id])
-    #@allShoes = Shoe.all
-    #@shoesForSale = Shoe.all.where(sold: false, seller_id: session[:user_id])
-    #@shoesSold = Shoe.all.where(sold: true, seller_id: session[:user_id])
-    #@shoesBought = Shoe.all.where(sold: true, buyer_id: session[:user_id])
-
-    #binding.pry
+    @user = User.find(params[:id])
+    @allLikes = Like.all.where(user_id: params[:id])
   end
 
   def create

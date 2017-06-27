@@ -1,0 +1,57 @@
+<br>
+<div class = "container">
+  <div class = "row">
+
+    <div class="col-md-9">
+        <h2>Hi: <%= @user.first_name %></h2>
+    </div>
+  </div>
+  <div class = "row">
+
+  <div class="col-md-8">
+  <h2> All the songs in our hub:</h2>
+  <table class="table well">
+    <tr>
+      <th>Artist</th>
+      <th>Title</th>
+      <th>No. Times Song Has Been Added</th>
+      <th>Add to Playlist </th>
+    </tr>
+
+    <% @allSongs.each do |song| %>
+    <tr>
+      <td><%= song.artist %></td>
+      <td><a href="/songs/<%= song.id%>"><%= song.title %></a></td>
+      <td><%= song.count %></td>
+      <td>
+        <form action = "/likes" method = "post">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="hidden" name="song_id" value = "<%= song.id %>">
+          <input type="submit" name="add" value = "Add">
+        </form>
+
+      </td>
+    </tr>
+    <%end%>
+  </table>
+  </div>
+  </div>
+  <div class = "row">
+    <div class="col-md-4 well">
+      <h1>Add a Song</h1>
+      <% if flash[:errorsSong] %>
+      	<% flash[:errorsSong].each do |e| %>
+      		<p><%= e %></p>
+      	<% end %>
+      <% end %>
+      <form class="table well" action='/songs/' method='post'>
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        Title:<input type='text' name='song[title]'  /><br>
+        Artist:<input type='text' name='song[artist]'  /><br>
+
+        <input type='submit' value='Add Song' />
+      </form>
+
+  </div>
+</div>
+</div>

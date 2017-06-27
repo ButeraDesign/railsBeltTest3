@@ -14,7 +14,8 @@ class SessionsController < ApplicationController
 
     if @user
       session[:user_id] = @user.id
-      redirect_to "/users/#{@user.id}"
+      #redirect_to "/users/#{@user.id}"
+      redirect_to "/songs"
     else
       puts 'Create Error'
       flash[:errorsLogin] = ["Invalid Email or PW"]
@@ -26,6 +27,6 @@ class SessionsController < ApplicationController
 
   def destroy
     reset_session
-    redirect_to "/sessions/new"
+    redirect_to "/users/new"
   end
 end

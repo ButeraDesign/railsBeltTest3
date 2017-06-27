@@ -1,0 +1,47 @@
+<br>
+<div class = "container">
+
+<div class = "row">
+
+<div class="col-md-3">
+<a href="/songs">Dashboard</a>
+</div>
+ |
+<div class="col-md-2">
+<form  action="/sessions/<%=(session[:user_id])%>" method='post'>
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="delete">
+  <input type='submit' value='Logoff' />
+</form>
+</div>
+
+</div>
+
+  <div class = "row">
+
+    <div class="col-md-9">
+        <h2>Others who added  <%= @song.artist %> - <%= @song.title %></h2>
+    </div>
+  </div>
+  <div class = "row">
+
+  <div class="col-md-8">
+  <table class="table well">
+    <tr>
+      <th>Name</th>
+      <th>Times Added</th>
+    </tr>
+
+    <% @allLikes.each do |like| %>
+    <tr>
+      <td><a href="/users/<%= like.user_id%>"><%= like.user.first_name %></a></td>
+      <td><%= like.count %></td>
+      <td>
+
+      </td>
+    </tr>
+    <%end%>
+  </table>
+  </div>
+  </div>
+</div>
